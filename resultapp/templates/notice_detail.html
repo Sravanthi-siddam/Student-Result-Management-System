@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5 mb-5">
+
+    <div class="row justify-content-center">
+        <div class="col-lg-9 col-md-10">
+            <div class="card shadow border-0">
+
+                <div class="card-header bg-dark text-white text-center py-2">
+                    <h5 class="mb-0">
+                        <i class="fas fa-graduation-cap"></i>
+                        Student Result Details
+                    </h5>
+                </div>
+                <div class="card-body p-4">
+                    <h5 class="text-primary mb-3">
+                        <i class="fas fa-bullhorn"></i>
+                        {{ notice.title }}
+                    </h5>
+                    <p class="mb-3">
+                        <strong>Notice Posting Date:</strong>
+                        {{ notice.posting_date|date:"M. d, Y, g:i a" }}
+                    </p>
+
+                    <hr>
+                    <div class="notice-description">
+                        {{ notice.detail|linebreaks }}
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<style>
+    .card {
+        border-radius: 6px;
+        overflow: hidden;
+    }
+
+    .card-header {
+        background-color: #212529 !important;
+    }
+
+    .card-header h5 {
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .card-body h5 {
+        font-weight: 600;
+    }
+
+    .card-body p,
+    .notice-description {
+        font-size: 14px;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    .notice-description {
+        min-height: 35px;
+    }
+
+    @media print {
+        nav,
+        footer {
+            display: none !important;
+        }
+
+        .card {
+            box-shadow: none !important;
+        }
+    }
+</style>
+
+{% endblock %}

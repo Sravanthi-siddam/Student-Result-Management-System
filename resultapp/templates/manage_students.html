@@ -1,0 +1,98 @@
+{% extends 'admin_base.html' %}
+
+{% block content %}
+
+<div class="container-fluid mt-4 mb-5">
+    <div class="mb-4">
+        <h2><i class="fas fa-users"></i>Manage Students</h2>
+    </div>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show"
+                 role="alert">
+                {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>S.No.</th>
+                    <th>Student Name</th>
+                    <th>Reg ID</th>
+                    <th>Branch</th>
+                    <th>Reg Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in students %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ i.name }}</td>
+                        <td>{{ i.reg_id }}</td>
+                        <td>
+                            {% if i.student_branch %}
+                                {{ i.student_branch.branch_name }} - {{ i.student_branch.section }}
+                            {% else %}
+                                Not Assigned
+                            {% endif %}
+                        </td>
+                        <td>{{ i.reg_date|date:"d-m-Y" }}</td>
+                        <td>
+                            {% if i.status == 1 %}
+                                <span class="badge bg-success">
+                                    Active
+                                </span>
+                            {% else %}
+                                <span class="badge bg-danger">
+                                    Inactive
+                                </span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if i.status == 1 %}
+                                <a href="{% url 'view_student_results' i.id %}" class="btn btn-info btn-sm text-dark mb-1"><i class="fas fa-eye"></i>
+                                    View Results</a>
+                                <form method="POST"
+                                      action="{% url 'delete_student' i.id %}"class="d-inline"
+                                      onsubmit="return confirm('Are you sure you want to permanently delete this student and their associated results?');">
+                                    {% csrf_token %}
+
+                                    <button type="submit"
+                                            class="btn btn-danger btn-sm mb-1"><i class="fas fa-trash"></i>
+                                        Delete
+                                    </button>
+                                </form>
+                            {% else %}
+                                <span class="text-muted">
+                                    No Action
+                                </span>
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                {% empty %}
+
+                    <tr>
+                        <td colspan="7" class="text-center">
+                            No students found.
+                        </td>
+                    </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends 'admin_base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">
+        <i class="fas fa-eye"></i> Student Results
+    </h2>
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h5>Student Name: {{ student.name }}</h5>
+            <p>
+                <strong>Registration ID:</strong>
+                {{ student.reg_id }}
+            </p>
+            <p>
+                <strong>Branch:</strong>
+                {{ student.student_branch.branch_name }}
+                - {{ student.student_branch.section }}
+            </p>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-dark text-white">
+            <h5 class="mb-0">Subject-wise Results</h5>
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>S.No.</th>
+                            <th>Subject</th>
+                            <th>Subject Code</th>
+                            <th>Marks</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for r in results %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ r.subject.subject_name }}</td>
+                            <td>{{ r.subject.subject_id }}</td>
+                            <td>{{ r.marks }}</td>
+                            <td>
+                                {% if r.marks >= 35 %}
+                                    <span class="badge bg-success">
+                                        Pass
+                                    </span>
+                                {% else %}
+                                    <span class="badge bg-danger">
+                                        Fail
+                                    </span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                No results have been entered for this student.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <a href="{% url 'manage_students' %}"
+               class="btn btn-secondary">
+                Back to Manage Students
+            </a>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

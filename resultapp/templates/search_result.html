@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow">
+                <div class="card-header text-center bg-dark text-white">
+                    <h4><i class="fas fa-user-graduation"></i>Search Result</h4>
+                </div>
+                <div class="card-body p-4">
+                    {% if error %}
+                    <div class="alert alert-danger text-center">{{error}}</div>
+
+                    {% endif %}
+                    <form method="POST" action="{% url 'check_result' %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="regid" class="form-label"><i class="fas fa-user"></i>UserName</label>
+                            <input type="text" class="form-control" id="regid" name="regid" placeholder="Enter Reg.No"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="branch" class="form-label">Subject Branch</label>
+                            <select class="form-select" id="branch" name="branch" required>
+                                <option value="">--- Select Branch ---</option>
+                                {% for i in branches %}
+                                <option value="{{i.id}}">{{i.branch_name}} - section {{i.section}}</option>
+
+                                {% endfor %}
+                            </select>
+
+
+                            <button type="submit" class="btn btn-success w-100"><i
+                                    class="fas fa-check me-1"></i>Search</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

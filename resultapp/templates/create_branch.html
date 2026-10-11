@@ -1,0 +1,39 @@
+{% extends 'admin_base.html' %}
+
+{% block content %}
+<div class=""container>
+    <h2 class="mb-4"><i class="fas fa-plus-circle"></i> ADD BRANCH</h2>
+    {% if messages %}
+        {% for m in messages %}
+            <div class="alert alert-{% if m.tags == 'error' %}danger{% else %}{{m.tags}}{% endif %} alert-dismissible fade show" role="alert">
+                {{m}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+
+            </div>
+
+
+        {% endfor %}
+
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="Branchname" class="form-label">Name of the Branch</label> 
+            <input type="text" class="form-control" id="branchname" name="branchname" reuired placeholder="e.g.,CSE,ECE">
+
+        </div>
+        <div class="mb-3">
+            <label for="Branchnamenumaric" class="form-label">Branch ID</label> 
+            <input type="text" class="form-control" id="branch_id" name="branch_id" reuired placeholder="1A04,1A05">
+
+        </div>
+        <div class="mb-3">
+            <label for="section" class="form-label">section</label> 
+            <input type="text" class="form-control" id="section" name="section" reuired placeholder="A,B,C">
+
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+</div>
+
+{% endblock %}

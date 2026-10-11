@@ -1,0 +1,107 @@
+{% extends 'admin_base.html' %}
+
+{% block content %}
+
+<div class="container">
+
+    <h2 class="mb-4">
+        <i class="fas fa-list"></i>
+        Manage Subject Combinations
+    </h2>
+
+    {% if messages %}
+
+        {% for m in messages %}
+
+            <div class="alert alert-{% if m.tags == 'error' %}danger{% else %}{{ m.tags }}{% endif %} alert-dismissible fade show"
+                 role="alert">
+
+                {{ m }}
+
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert">
+                </button>
+
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+
+    <div class="table-responsive">
+
+        <table class="table table-bordered table-striped">
+
+            <thead class="table-dark">
+
+                <tr>
+                    <th>S.No</th>
+                    <th>Branch</th>
+                    <th>Section</th>
+                    <th>Subject</th>
+                    <th>Subject Code</th>
+                    <th>Staus</th>
+                    <th>Actions</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for i in combinations %}
+
+                <tr>
+
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ i.student_branch.branch_name }}</td>
+                    <td>{{ i.student_branch.section }}</td>
+                    <td>{{ i.subject.subject_name }}</td>
+                    <td>{{ i.subject.subject_id }}</td>
+
+                    <td>
+
+                        <a href="{% url 'edit_subject' i.id %}"
+                           class="btn btn-green btn-sm"><i class="fas fa-edit"></i>Active
+
+                        </a>
+
+
+                        <a href="?delete={{ i.id }}"
+                           class="btn btn-danger btn-sm"
+                           onclick="return confirm('Are you sure you want to delete this combination?');">
+
+                            <i class="fas fa-trash"></i>
+                            Delete
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td colspan="6"
+                        class="text-center">
+
+                        No subject combinations found.
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+
+{% extends 'admin_base.html' %}
+
+{% block content %}
+
+<div class="container">
+
+    <h2 class="mb-4">
+        <i class="fas fa-edit"></i> Edit Subject</h2>
+
+    {% if messages %}
+        {% for m in messages %}
+            <div class="alert alert-{% if m.tags == 'error' %}danger{% else %}{{ m.tags }}{% endif %}">
+                {{ m }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label class="form-label">Name of the Subject</label>
+
+            <input type="text"
+                   class="form-control"
+                   name="subjectname"
+                   value="{{ subject.subject_name }}"
+                   required>
+        </div>
+
+
+        <div class="mb-3">
+            <label class="form-label">Subject Code</label>
+
+            <input type="text"
+                   class="form-control"
+                   name="subjectcode"
+                   value="{{ subject.subject_id }}"
+                   required>
+        </div>
+
+
+        <button type="submit" class="btn btn-success">
+            Update
+        </button>
+
+        <a href="{% url 'manage_subject' %}" class="btn btn-secondary">
+            Cancel
+        </a>
+
+    </form>
+
+</div>
+
+{% endblock %}

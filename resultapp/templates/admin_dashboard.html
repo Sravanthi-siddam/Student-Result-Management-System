@@ -1,0 +1,87 @@
+{% extends 'admin_base.html' %}
+
+{% block content %}
+<h2 class="mb-4"><i class="fas fa-tachometer-alt"></i>Welcome to admin Dashboard</h2>
+<div class="row g-4">
+    <div class="col-md-6 col-lg-3">
+        <a href="" class="text-decoration-none">
+            <div class="card text-white bg-primary shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h3> {{total_students}} </h3>
+                            <p class="mb-0">Registerd Students</p>
+                        </div><i class="fas fa-users fa-2x"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </a>
+
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <a href="" class="text-decoration-none">
+            <div class="card text-white bg-danger shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h3>{{total_subjects}}</h3>
+                            <p class="mb-0">Subjects Listed</p>
+                        </div><i class="fas fa-book"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </a>
+
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <a href="" class="text-decoration-none">
+            <div class="card text-white bg-warning shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h3>{{total_branches}}</h3>
+                            <p class="mb-0">Classes</p>
+                        </div><i class="fas fa-school"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </a>
+
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <a href="" class="text-decoration-none">
+            <div class="card text-white bg-success shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h3>{{total_results}}</h3>
+                            <p class="mb-0">Results Declaration</p>
+                        </div><i class="fas fa-computer"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </a>
+
+    </div>
+
+</div>
+
+
+
+{% endblock %}
